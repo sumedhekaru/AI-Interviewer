@@ -1,19 +1,11 @@
 
-# Real-Time AI Voice Chat 🎤💬🧠🔊
+# AI Interviewer 🎤🧠💼
 
-**Have a natural, spoken conversation with an AI!**  
+**Conduct real-time mock interviews with an AI interviewer.**  
 
-This project lets you chat with a Large Language Model (LLM) using just your voice, receiving spoken responses in near real-time. Think of it as your own digital conversation partner.
+This project repurposes KoljaB's superb [RealtimeVoiceChat](https://github.com/KoljaB/RealtimeVoiceChat) into an interview-coaching experience. Speak naturally, receive instant feedback, and iterate on your answers without needing a human interviewer present.
 
-https://github.com/user-attachments/assets/16cc29a7-bec2-4dd0-a056-d213db798d8f
-
-*(early preview - first reasonably stable version)*
-
-> ❗ **Project Status: Community-Driven**
-> 
-> This project is no longer being actively maintained by me due to time constraints. I've taken on too many projects and I have to step back. I will no longer be implementing new features or providing user support.
->
-> I will continue to review and merge high-quality, well-written Pull Requests from the community from time to time. Your contributions are welcome and appreciated!
+> ℹ️ **Status:** actively adapting the original voice chat experience into an AI interviewer. Core audio/LLM streaming is inherited from RealtimeVoiceChat; interview-specific flows are evolving in this fork.
 
 ## What's Under the Hood?
 
@@ -29,14 +21,24 @@ A sophisticated client-server system built for low-latency interaction:
 
 ## Key Features ✨
 
-*   **Fluid Conversation:** Speak and listen, just like a real chat.
-*   **Real-Time Feedback:** See partial transcriptions and AI responses as they happen.
-*   **Low Latency Focus:** Optimized architecture using audio chunk streaming.
-*   **Smart Turn-Taking:** Dynamic silence detection (`turndetect.py`) adapts to the conversation pace.
+*   **Mock Interview Flows:** Tailor the interviewer persona and question strategy through `system_prompt.txt` and custom prompts.
+*   **Fluid Conversation:** Speak and listen in natural language, powered by the original low-latency pipeline.
+*   **Real-Time Feedback:** Observe partial transcripts and interviewer reactions instantly.
+*   **Smart Turn-Taking:** Silence detection (`turndetect.py`) keeps the interview cadence natural.
 *   **Flexible AI Brains:** Pluggable LLM backends (Ollama default, OpenAI support via `llm_module.py`).
 *   **Customizable Voices:** Choose from different Text-to-Speech engines (Kokoro, Coqui, Orpheus via `audio_module.py`).
 *   **Web Interface:** Clean and simple UI using Vanilla JS and the Web Audio API.
 *   **Dockerized Deployment:** Recommended setup using Docker Compose for easier dependency management.
+
+## Interviewer Customisation 🧩
+
+The following touchpoints steer the interview experience:
+
+* **system_prompt.txt** – Define interviewer tone, evaluation criteria, and follow-up tactics.
+* **speech_pipeline_manager.py** – Extend the pipeline with question scheduling, scoring logic, or interviewer personas.
+* **static/app.js** – Surface interview progress, timers, or scoring overlays in the browser UI.
+
+Because the upstream project already provides robust audio streaming, most interview logic can be layered by adjusting prompts and state management without rewriting the low-level pipeline.
 
 ## Technology Stack 🛠️
 
@@ -247,10 +249,12 @@ Want to tweak the AI's voice, brain, or how it listens? Modify the Python files 
 
 ## Contributing 🤝
 
-Got ideas or found a bug? Contributions are welcome! Feel free to open issues or submit pull requests.
+Ideas for interview flows, evaluation frameworks, or UI improvements are welcome! Feel free to open issues or submit pull requests.
+
+## Attribution 🙏
+
+This repository builds directly on KoljaB's open-source [RealtimeVoiceChat](https://github.com/KoljaB/RealtimeVoiceChat). Huge thanks to the original author and contributors for the real-time audio + LLM infrastructure that makes this adaptation possible.
 
 ## License 📜
 
-The core codebase of this project is released under the **MIT License** (see the [LICENSE](./LICENSE) file for details).
-
-This project relies on external specific TTS engines (like `Coqui XTTSv2`) and LLM providers which have their **own licensing terms**. Please ensure you comply with the licenses of all components you use.
+The code remains under the **MIT License** (see the [LICENSE](./LICENSE) file). Respect the licenses of any third-party TTS engines, models, or APIs you integrate.
